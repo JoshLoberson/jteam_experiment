@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'user'], function(){
+    Route::group(['prefix' => 'auth'], function(){
+        Route::get('/social-sign-in/{provider?}',['as' => 'auth.getSocialAuth', 'uses' => 'UserAuthController@SignInProcess']);
+        Route::get('/social-sign-in-callback/{provider?}',['as' => 'auth.getSocialAuthCallback', 'uses' => 'UserAuthController@SignInCallbackProcess']);
+    });
+});
