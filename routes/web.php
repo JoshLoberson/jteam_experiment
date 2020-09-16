@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test1/{n?}',  ['as'=>'q1', 'uses'=>'QuestionController@q1']);
