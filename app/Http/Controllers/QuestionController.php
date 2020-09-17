@@ -3,10 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Jcart\Cart as Cart;
+use App\Jcart\Cart;
+use App\Jpublish\Product;
+use App\Jpublish\Pchome;
+use App\Jpublish\Shopee;
+use App\Jpublish\Ruten;
+use App\Jpublish\Yahoo;
 
 class QuestionController extends Controller
 {
+    private $platformObj;
+
+    public function __construct()
+    {
+        $this->platformObj = [
+            new Pchome(),
+            new Shopee(),
+            new Ruten(),
+            new Yahoo()
+        ];
+    }
+
     public function q1($n=1)
     {
         if ($n<1) {
@@ -49,5 +66,14 @@ class QuestionController extends Controller
                 break;
         }
         return $cart->content();
+    }
+
+    public function q3()
+    {
+        foreach ($this->platformObj as $obj) {
+            $product = new Product($obj);
+            echo $product->publish().'<br>';
+        }
+        return;
     }
 }
