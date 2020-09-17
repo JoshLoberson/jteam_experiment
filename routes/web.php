@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/test1/{n?}',  ['as'=>'q1', 'uses'=>'QuestionController@q1']);
+Route::get('/test2/{action?}/{itemId?}',  ['as'=>'q2', 'uses'=>'QuestionController@q2']);
